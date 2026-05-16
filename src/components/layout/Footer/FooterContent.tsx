@@ -21,7 +21,10 @@ const FooterContent = ({
   settings,
 }: FooterContentProps): React.JSX.Element => {
   return (
-    <Section as="footer" className="bg-primary text-primary-foreground">
+    <Section
+      as="footer"
+      className="bg-primary text-primary-foreground dark:bg-primary/40"
+    >
       <SliceZone components={components} slices={data.slices1} />
 
       <div className="my-4 text-center lg:my-8">

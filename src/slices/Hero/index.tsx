@@ -18,30 +18,34 @@ export type HeroProps = SliceComponentProps<Content.HeroSlice>
  */
 const Hero = ({ slice, index }: HeroProps): React.JSX.Element => {
   return (
-    <Section
+    <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className={cn('relative text-primary-foreground', {
-        'bg-primary': slice.variation === 'default',
-        'lg:h-[calc(100vh-64px)] lg:min-h-187.5':
-          slice.variation !== 'contentHeight',
-      })}
+      className={cn(
+        'relative flex items-center px-4 py-8 text-primary-foreground md:px-12 md:py-16 lg:py-6',
+        {
+          'bg-primary': slice.variation === 'default',
+          'lg:h-[calc(100vh-64px)] lg:min-h-187.5':
+            slice.variation !== 'contentHeight',
+        },
+      )}
     >
       {slice.variation !== 'default' && isFilled.image(slice.primary.image) && (
         <PrismicNextImage
           field={slice.primary.image}
           fallbackAlt=""
           fill
-          sizes="100vw"
+          sizes="(min-width: 1340px) 100vw, (min-width: 1040px) calc(69.29vw + 405px), (min-width: 400px) calc(96.61vw + 35px), 488px"
           className="z-[-2] object-cover"
-          priority={index === 0}
+          loading="eager"
+          fetchPriority="high"
         />
       )}
       <div
         className={cn(
-          'mx-auto my-8 flex max-w-(--breakpoint-xl) flex-col items-center justify-center rounded-lg p-6 backdrop-blur lg:p-12',
+          'mx-auto my-8 flex w-(--breakpoint-sm) flex-col items-center justify-center rounded-lg p-6 backdrop-blur md:w-(--breakpoint-md) lg:w-(--breakpoint-lg) lg:p-12 xl:w-(--breakpoint-xl)',
           {
-            'bg-primary/80': slice.variation !== 'default',
+            'bg-primary/80 dark:bg-red-950/80': slice.variation !== 'default',
           },
         )}
       >
@@ -82,7 +86,7 @@ const Hero = ({ slice, index }: HeroProps): React.JSX.Element => {
           </Button>
         )}
       </div>
-    </Section>
+    </section>
   )
 }
 
