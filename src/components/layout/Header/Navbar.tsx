@@ -49,7 +49,7 @@ const Navbar = ({
                 width={60}
               />
             ) : (
-              <Heading as="h1" size="xl" className="p-1.5 text-red-400">
+              <Heading as="h1" size="xl" className="p-1.5 dark:text-red-400">
                 {site_title}
               </Heading>
             )}

@@ -36,7 +36,9 @@ const Faq = ({ slice }: FaqProps): React.JSX.Element => {
               <Heading
                 as="h2"
                 size="5xl"
-                className={cn('py-4 lg:py-8 lg:text-center')}
+                className={cn(
+                  'py-4 lg:py-8 lg:text-center dark:text-foreground',
+                )}
               >
                 {children}
               </Heading>
@@ -55,13 +57,13 @@ const Faq = ({ slice }: FaqProps): React.JSX.Element => {
               value={asText(item.question)}
               className="border-none"
             >
-              <AccordionTrigger>
+              <AccordionTrigger className="hover:cursor-pointer">
                 {isFilled.richText(item.question) ? (
                   <PrismicRichText
                     field={item.question}
                     components={{
                       paragraph: ({ children }) => (
-                        <p className="prose pr-4 text-left font-semibold lg:prose-lg xl:prose-xl">
+                        <p className="prose pr-4 text-left font-semibold lg:prose-lg xl:prose-xl dark:prose-invert">
                           {children}
                         </p>
                       ),
@@ -77,7 +79,7 @@ const Faq = ({ slice }: FaqProps): React.JSX.Element => {
                     field={item.answer}
                     components={{
                       paragraph: ({ children }) => (
-                        <p className="my-1.5 prose lg:my-3 lg:prose-lg">
+                        <p className="my-1.5 prose lg:my-3 lg:prose-lg dark:prose-invert">
                           {children}
                         </p>
                       ),
