@@ -20,35 +20,35 @@ const defaultComponents: JSXMapSerializer = {
   },
   heading2: ({ children }: { children: ReactNode }) => {
     return (
-      <Heading as="h2" size="5xl">
+      <Heading as="h2" size="5xl" className="dark:text-foreground">
         {children}
       </Heading>
     )
   },
   heading3: ({ children }: { children: ReactNode }) => {
     return (
-      <Heading as="h3" size="4xl">
+      <Heading as="h3" size="4xl" className="dark:text-foreground">
         {children}
       </Heading>
     )
   },
   heading4: ({ children }: { children: ReactNode }) => {
     return (
-      <Heading as="h4" size="3xl">
+      <Heading as="h4" size="3xl" className="dark:text-foreground">
         {children}
       </Heading>
     )
   },
   heading5: ({ children }: { children: ReactNode }) => {
     return (
-      <Heading as="h5" size="2xl">
+      <Heading as="h5" size="2xl" className="dark:text-foreground">
         {children}
       </Heading>
     )
   },
   heading6: ({ children }: { children: ReactNode }) => {
     return (
-      <Heading as="h6" size="xl">
+      <Heading as="h6" size="xl" className="dark:text-foreground">
         {children}
       </Heading>
     )
@@ -78,7 +78,7 @@ const defaultComponents: JSXMapSerializer = {
               alt={node.alt || ''}
               width={node.dimensions.width}
               height={node.dimensions.height}
-              className="my-4 rounded-lg shadow-sm md:my-6 lg:my-8 xl:my-10"
+              className="y-6 my-4 rounded-lg shadow-sm lg:my-8 xl:my-10"
               title={node.alt || ''}
             />
           </Link>

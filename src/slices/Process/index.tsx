@@ -31,7 +31,7 @@ const Process = ({ slice }: ProcessProps): React.JSX.Element => {
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       width="xl"
-      className={cn('py-8 lg:pb-24', {})}
+      className={cn('py-8', {})}
     >
       <div className="mx-auto my-8 flex max-w-screen-2xl flex-col items-center justify-center">
         {isFilled.keyText(slice.primary.title) && (
@@ -45,7 +45,9 @@ const Process = ({ slice }: ProcessProps): React.JSX.Element => {
                 <Heading
                   as="h2"
                   size="5xl"
-                  className={cn('py-4 lg:py-8 lg:text-center', {})}
+                  className={cn(
+                    'py-4 lg:py-8 lg:text-center dark:text-foreground',
+                  )}
                 >
                   {children}
                 </Heading>
@@ -59,7 +61,9 @@ const Process = ({ slice }: ProcessProps): React.JSX.Element => {
               field={slice.primary.description}
               components={{
                 paragraph: ({ children }) => (
-                  <p className="prose mb-8 lg:prose-lg">{children}</p>
+                  <p className="prose mb-8 lg:prose-lg dark:prose-invert">
+                    {children}
+                  </p>
                 ),
               }}
             />
@@ -74,7 +78,10 @@ const Process = ({ slice }: ProcessProps): React.JSX.Element => {
                   Icon = icons[item.icon] as React.ElementType
                 }
                 return (
-                  <Card key={slice.id + index} className={cn('max-w-sm', {})}>
+                  <Card
+                    key={slice.id + index}
+                    className={cn('flex max-w-sm flex-col justify-start')}
+                  >
                     <CardHeader>
                       {Icon ? (
                         <Icon className="inline-flex h-24 w-24 self-center" />
@@ -95,14 +102,16 @@ const Process = ({ slice }: ProcessProps): React.JSX.Element => {
                           field={item.description}
                           components={{
                             paragraph: ({ children }) => (
-                              <p className="prose mb-8">{children}</p>
+                              <p className="prose mb-8 dark:prose-invert">
+                                {children}
+                              </p>
                             ),
                           }}
                         />
                       )}
                     </CardContent>
                     {isFilled.link(item.button_link) && (
-                      <CardFooter className="flex justify-center">
+                      <CardFooter className="mt-auto flex justify-center">
                         <Button
                           variant={'default'}
                           asChild

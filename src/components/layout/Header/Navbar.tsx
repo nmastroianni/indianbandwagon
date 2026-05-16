@@ -15,6 +15,7 @@ import { LayoutDocumentDataNavigationItem } from '../../../../prismicio-types'
 import MobileMenu from './MobileMenu'
 import Heading from '@/components/typography/Heading'
 import Link from 'next/link'
+import { ThemeToggle } from '@/components/ThemeToggle'
 
 type NavbarProps = {
   navigation: Array<LayoutDocumentDataNavigationItem>
@@ -48,7 +49,7 @@ const Navbar = ({
                 width={60}
               />
             ) : (
-              <Heading as="h1" size="xl" className="p-1.5">
+              <Heading as="h1" size="xl" className="p-1.5 text-red-400">
                 {site_title}
               </Heading>
             )}
@@ -72,6 +73,7 @@ const Navbar = ({
                 {cta_label}
               </PrismicNextLink>
             )}
+            <ThemeToggle />
           </div>
         </div>
       </Section>
