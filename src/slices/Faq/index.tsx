@@ -46,16 +46,22 @@ const Faq = ({ slice }: FaqProps): React.JSX.Element => {
           }}
         />
       </div>
-      {slice.items.length > 0 && (
+      {isFilled.group(slice.primary.questions) && (
         <Accordion
-          type="multiple"
-          className="my-6 rounded-lg bg-secondary px-4 lg:my-12"
+          type={slice.primary.type || 'multiple'}
+          collapsible={slice.primary.collapsible}
+          className={cn('my-6 rounded-lg bg-secondary px-4 lg:my-12', {
+            'border-2 border-chart-3': slice.primary.border,
+          })}
         >
-          {slice.items.map((item, index) => (
+          {slice.primary.questions.map((item, index) => (
             <AccordionItem
               key={slice.id + index}
               value={asText(item.question)}
-              className="border-none"
+              className={cn('', {
+                'border-b': slice.primary.border,
+                'border-none': !slice.primary.border,
+              })}
             >
               <AccordionTrigger className="hover:cursor-pointer">
                 {isFilled.richText(item.question) ? (

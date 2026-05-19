@@ -30,35 +30,23 @@
             "single": "paragraph,strong,em"
           }
         },
-        "button_label": {
-          "type": "Text",
-          "config": {
-            "label": "Button Label",
-            "placeholder": ""
-          }
-        },
         "button_link": {
           "type": "Link",
           "config": {
             "label": "Button Link",
-            "placeholder": "",
-            "select": null
-          }
-        },
-        "button_style": {
-          "type": "Select",
-          "config": {
-            "label": "Button Style",
-            "placeholder": "Style of button",
-            "options": [
+            "placeholder": "Enter link",
+            "select": null,
+            "allowTargetBlank": true,
+            "allowText": true,
+            "repeat": true,
+            "variants": [
               "default",
               "secondary",
               "outline",
               "ghost",
               "destructive",
               "link"
-            ],
-            "default_value": "default"
+            ]
           }
         }
       },
@@ -98,35 +86,23 @@
             "single": "paragraph,strong,em"
           }
         },
-        "button_label": {
-          "type": "Text",
-          "config": {
-            "label": "Button Label",
-            "placeholder": ""
-          }
-        },
         "button_link": {
           "type": "Link",
           "config": {
             "label": "Button Link",
-            "placeholder": "",
-            "select": null
-          }
-        },
-        "button_style": {
-          "type": "Select",
-          "config": {
-            "label": "Button Style",
-            "placeholder": "Style of button",
-            "options": [
+            "placeholder": "Enter link",
+            "select": null,
+            "allowTargetBlank": true,
+            "allowText": true,
+            "repeat": true,
+            "variants": [
               "default",
               "secondary",
               "outline",
               "ghost",
               "destructive",
               "link"
-            ],
-            "default_value": "default"
+            ]
           }
         }
       },
@@ -166,35 +142,23 @@
             "single": "paragraph,strong,em"
           }
         },
-        "button_label": {
-          "type": "Text",
-          "config": {
-            "label": "Button Label",
-            "placeholder": ""
-          }
-        },
         "button_link": {
           "type": "Link",
           "config": {
             "label": "Button Link",
-            "placeholder": "",
-            "select": null
-          }
-        },
-        "button_style": {
-          "type": "Select",
-          "config": {
-            "label": "Button Style",
-            "placeholder": "Style of button",
-            "options": [
+            "placeholder": "Enter link",
+            "select": null,
+            "allowTargetBlank": true,
+            "allowText": true,
+            "repeat": true,
+            "variants": [
               "default",
               "secondary",
               "outline",
               "ghost",
               "destructive",
               "link"
-            ],
-            "default_value": "default"
+            ]
           }
         }
       },

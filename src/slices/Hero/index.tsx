@@ -4,7 +4,7 @@ import { PrismicRichText } from '@/components/typography/PrismicRichText'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { Content, isFilled } from '@prismicio/client'
-import { PrismicNextImage } from '@prismicio/next'
+import { PrismicNextImage, PrismicNextLink } from '@prismicio/next'
 import { SliceComponentProps } from '@prismicio/react'
 import React from 'react'
 
@@ -73,17 +73,27 @@ const Hero = ({ slice, index }: HeroProps): React.JSX.Element => {
             }}
           />
         )}
-        {isFilled.link(slice.primary.button_link) && (
-          <Button
-            variant={slice.primary.button_style || 'default'}
-            size="lg"
-            className={cn('mt-4 lg:mt-8', {
-              'bg-primary': slice.primary.button_style === 'outline',
-              'text-primary-foreground': slice.primary.button_style === 'link',
+        {slice.primary.button_link.length > 0 && (
+          <div className="flex justify-center gap-6">
+            {slice.primary.button_link.map((item, index) => {
+              return (
+                <Button
+                  key={slice.id + slice.slice_type + index}
+                  variant={item.variant || 'default'}
+                  size="lg"
+                  className={cn('mt-4 lg:mt-8', {
+                    'bg-primary': item.variant === 'outline',
+                    'text-primary-foreground': item.variant === 'link',
+                  })}
+                  asChild
+                >
+                  <PrismicNextLink field={item}>
+                    {item.text || 'Add a Button Label'}
+                  </PrismicNextLink>
+                </Button>
+              )
             })}
-          >
-            {slice.primary.button_label || 'Missing Button Label'}
-          </Button>
+          </div>
         )}
       </div>
     </section>

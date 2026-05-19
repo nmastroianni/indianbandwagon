@@ -890,6 +890,31 @@ export type ContentIndexSlice = prismic.SharedSlice<
 >
 
 /**
+ * Item in *Faq → Default → Primary → Questions*
+ */
+export interface FaqSliceDefaultPrimaryQuestionsItem {
+  /**
+   * Question field in *Faq → Default → Primary → Questions*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter the question text
+   * - **API ID Path**: faq.default.primary.questions[].question
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  question: prismic.RichTextField
+
+  /**
+   * Answer field in *Faq → Default → Primary → Questions*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Answer the question
+   * - **API ID Path**: faq.default.primary.questions[].answer
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  answer: prismic.RichTextField
+}
+
+/**
  * Primary content in *Faq → Default → Primary*
  */
 export interface FaqSliceDefaultPrimary {
@@ -902,31 +927,49 @@ export interface FaqSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/fields/rich-text
    */
   heading: prismic.RichTextField
-}
-
-/**
- * Primary content in *Faq → Items*
- */
-export interface FaqSliceDefaultItem {
-  /**
-   * Question field in *Faq → Items*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: faq.items[].question
-   * - **Documentation**: https://prismic.io/docs/fields/rich-text
-   */
-  question: prismic.RichTextField
 
   /**
-   * Answer field in *Faq → Items*
+   * Type field in *Faq → Default → Primary*
    *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: faq.items[].answer
-   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   * - **Field Type**: Select
+   * - **Placeholder**: Mutiple allows more than 1 to be open
+   * - **Default Value**: multiple
+   * - **API ID Path**: faq.default.primary.type
+   * - **Documentation**: https://prismic.io/docs/fields/select
    */
-  answer: prismic.RichTextField
+  type: prismic.SelectField<'multiple' | 'single', 'filled'>
+
+  /**
+   * Border field in *Faq → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: faq.default.primary.border
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  border: prismic.BooleanField
+
+  /**
+   * Collapsible field in *Faq → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: true
+   * - **API ID Path**: faq.default.primary.collapsible
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  collapsible: prismic.BooleanField
+
+  /**
+   * Questions field in *Faq → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: faq.default.primary.questions[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  questions: prismic.GroupField<Simplify<FaqSliceDefaultPrimaryQuestionsItem>>
 }
 
 /**
@@ -939,7 +982,7 @@ export interface FaqSliceDefaultItem {
 export type FaqSliceDefault = prismic.SharedSliceVariation<
   'default',
   Simplify<FaqSliceDefaultPrimary>,
-  Simplify<FaqSliceDefaultItem>
+  never
 >
 
 /**
@@ -1594,43 +1637,21 @@ export interface HeroSliceDefaultPrimary {
   description: prismic.RichTextField
 
   /**
-   * Button Label field in *Hero → Default → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: hero.default.primary.button_label
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  button_label: prismic.KeyTextField
-
-  /**
    * Button Link field in *Hero → Default → Primary*
    *
    * - **Field Type**: Link
-   * - **Placeholder**: *None*
+   * - **Placeholder**: Enter link
    * - **API ID Path**: hero.default.primary.button_link
    * - **Documentation**: https://prismic.io/docs/fields/link
    */
-  button_link: prismic.LinkField<
-    string,
-    string,
-    unknown,
-    prismic.FieldState,
-    never
-  >
-
-  /**
-   * Button Style field in *Hero → Default → Primary*
-   *
-   * - **Field Type**: Select
-   * - **Placeholder**: Style of button
-   * - **Default Value**: default
-   * - **API ID Path**: hero.default.primary.button_style
-   * - **Documentation**: https://prismic.io/docs/fields/select
-   */
-  button_style: prismic.SelectField<
-    'default' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'link',
-    'filled'
+  button_link: prismic.Repeatable<
+    prismic.LinkField<
+      string,
+      string,
+      unknown,
+      prismic.FieldState,
+      'default' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'link'
+    >
   >
 }
 
@@ -1682,43 +1703,21 @@ export interface HeroSliceWithImagePrimary {
   description: prismic.RichTextField
 
   /**
-   * Button Label field in *Hero → With Image → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: hero.withImage.primary.button_label
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  button_label: prismic.KeyTextField
-
-  /**
    * Button Link field in *Hero → With Image → Primary*
    *
    * - **Field Type**: Link
-   * - **Placeholder**: *None*
+   * - **Placeholder**: Enter link
    * - **API ID Path**: hero.withImage.primary.button_link
    * - **Documentation**: https://prismic.io/docs/fields/link
    */
-  button_link: prismic.LinkField<
-    string,
-    string,
-    unknown,
-    prismic.FieldState,
-    never
-  >
-
-  /**
-   * Button Style field in *Hero → With Image → Primary*
-   *
-   * - **Field Type**: Select
-   * - **Placeholder**: Style of button
-   * - **Default Value**: default
-   * - **API ID Path**: hero.withImage.primary.button_style
-   * - **Documentation**: https://prismic.io/docs/fields/select
-   */
-  button_style: prismic.SelectField<
-    'default' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'link',
-    'filled'
+  button_link: prismic.Repeatable<
+    prismic.LinkField<
+      string,
+      string,
+      unknown,
+      prismic.FieldState,
+      'default' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'link'
+    >
   >
 }
 
@@ -1770,43 +1769,21 @@ export interface HeroSliceContentHeightPrimary {
   description: prismic.RichTextField
 
   /**
-   * Button Label field in *Hero → Content Height → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: hero.contentHeight.primary.button_label
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  button_label: prismic.KeyTextField
-
-  /**
    * Button Link field in *Hero → Content Height → Primary*
    *
    * - **Field Type**: Link
-   * - **Placeholder**: *None*
+   * - **Placeholder**: Enter link
    * - **API ID Path**: hero.contentHeight.primary.button_link
    * - **Documentation**: https://prismic.io/docs/fields/link
    */
-  button_link: prismic.LinkField<
-    string,
-    string,
-    unknown,
-    prismic.FieldState,
-    never
-  >
-
-  /**
-   * Button Style field in *Hero → Content Height → Primary*
-   *
-   * - **Field Type**: Select
-   * - **Placeholder**: Style of button
-   * - **Default Value**: default
-   * - **API ID Path**: hero.contentHeight.primary.button_style
-   * - **Documentation**: https://prismic.io/docs/fields/select
-   */
-  button_style: prismic.SelectField<
-    'default' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'link',
-    'filled'
+  button_link: prismic.Repeatable<
+    prismic.LinkField<
+      string,
+      string,
+      unknown,
+      prismic.FieldState,
+      'default' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'link'
+    >
   >
 }
 
@@ -2242,8 +2219,8 @@ declare module '@prismicio/client' {
       ContentIndexSliceVariation,
       ContentIndexSliceDefault,
       FaqSlice,
+      FaqSliceDefaultPrimaryQuestionsItem,
       FaqSliceDefaultPrimary,
-      FaqSliceDefaultItem,
       FaqSliceVariation,
       FaqSliceDefault,
       FeaturesSlice,

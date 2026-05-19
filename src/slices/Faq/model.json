@@ -20,28 +20,66 @@
             "allowTargetBlank": true,
             "single": "heading2"
           }
-        }
-      },
-      "items": {
-        "question": {
-          "type": "StructuredText",
+        },
+        "type": {
+          "type": "Select",
           "config": {
-            "label": "Question",
-            "placeholder": "",
-            "allowTargetBlank": true,
-            "single": "paragraph,strong,em"
+            "label": "Type",
+            "placeholder": "Mutiple allows more than 1 to be open",
+            "options": [
+              "multiple",
+              "single"
+            ],
+            "default_value": "multiple"
           }
         },
-        "answer": {
-          "type": "StructuredText",
+        "border": {
+          "type": "Boolean",
           "config": {
-            "label": "Answer",
-            "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "paragraph,strong,em,hyperlink,image,embed,list-item,o-list-item"
+            "label": "Border",
+            "placeholder_false": "No Border",
+            "placeholder_true": "Border",
+            "default_value": false
+          }
+        },
+        "collapsible": {
+          "type": "Boolean",
+          "config": {
+            "label": "Collapsible",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": true
+          }
+        },
+        "questions": {
+          "type": "Group",
+          "config": {
+            "label": "Questions",
+            "repeat": true,
+            "fields": {
+              "question": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Question",
+                  "placeholder": "Enter the question text",
+                  "allowTargetBlank": true,
+                  "single": "strong,em,hyperlink,paragraph"
+                }
+              },
+              "answer": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Answer",
+                  "placeholder": "Answer the question",
+                  "allowTargetBlank": true,
+                  "multi": "paragraph,preformatted,strong,em,hyperlink,image,embed,list-item,o-list-item"
+                }
+              }
+            }
           }
         }
-      }
+      },
+      "items": {}
     }
   ]
 }
