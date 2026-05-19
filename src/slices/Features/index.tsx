@@ -29,51 +29,40 @@ const Features = ({ slice }: FeaturesProps): React.JSX.Element => {
       })}
     >
       {isFilled.richText(slice.primary.heading) && (
-        <PrismicRichText
-          field={slice.primary.heading}
-          components={{
-            heading2: ({ children }) => (
-              <Heading
-                as="h2"
-                size="5xl"
-                className={cn(
-                  'py-4 lg:py-8 lg:text-center dark:text-foreground',
-                  {
-                    'text-primary-foreground': slice.variation === 'primary',
-                  },
-                )}
-              >
-                {children}
-              </Heading>
-            ),
-          }}
-        />
-      )}
-      {isFilled.richText(slice.primary.description) && (
-        <div
-          className={cn('mx-auto max-w-prose', {
-            'text-primary-foreground': slice.variation === 'primary',
-          })}
-        >
+        <div className="flex justify-center">
           <PrismicRichText
-            field={slice.primary.description}
+            field={slice.primary.heading}
             components={{
-              paragraph: ({ children }) => (
-                <p
-                  className={cn('prose mb-8 lg:prose-lg dark:text-white', {
-                    'text-white': slice.variation === 'primary',
+              heading2: ({ children }) => (
+                <Heading
+                  as="h3"
+                  size="5xl"
+                  className={cn({
+                    'dark:text-foreground': slice.variation === 'default',
                   })}
                 >
                   {children}
-                </p>
+                </Heading>
               ),
             }}
           />
         </div>
       )}
+      {isFilled.richText(slice.primary.description) && (
+        <div
+          className={cn(
+            'mx-auto max-w-prose py-6 lg:prose-lg lg:py-10 xl:prose-xl 2xl:prose-2xl',
+            {
+              'text-primary-foreground': slice.variation === 'primary',
+            },
+          )}
+        >
+          <PrismicRichText field={slice.primary.description} />
+        </div>
+      )}
       <div className="mt-8 flex flex-wrap justify-evenly gap-12 lg:mt-0 lg:gap-4">
-        {slice.items.length > 0 &&
-          slice.items.map((item, index) => {
+        {slice.primary.features.length > 0 &&
+          slice.primary.features.map((item, index) => {
             if (isFilled.richText(item.feature_heading)) {
               return (
                 <Card
@@ -82,9 +71,10 @@ const Features = ({ slice }: FeaturesProps): React.JSX.Element => {
                     'bg-muted': slice.variation === 'default',
                     'bg-primary text-primary-foreground':
                       slice.variation === 'primary',
+                    'bg-chart-4': slice.variation === 'secondary',
                   })}
                 >
-                  <CardHeader>
+                  <CardHeader className="items-center">
                     <PrismicRichText
                       field={item.feature_heading}
                       components={{
@@ -97,6 +87,8 @@ const Features = ({ slice }: FeaturesProps): React.JSX.Element => {
                               {
                                 'text-primary-foreground':
                                   slice.variation === 'primary',
+                                'text-background':
+                                  slice.variation === 'secondary',
                               },
                             )}
                           >
@@ -113,9 +105,16 @@ const Features = ({ slice }: FeaturesProps): React.JSX.Element => {
                         components={{
                           paragraph: ({ children }) => (
                             <p
-                              className={cn('prose mb-8 dark:text-white', {
-                                'text-white': slice.variation === 'primary',
-                              })}
+                              className={cn(
+                                'prose mb-8 text-foreground dark:text-white',
+                                {
+                                  'text-white':
+                                    slice.variation === 'primary' ||
+                                    'secondary',
+                                  'text-foreground':
+                                    slice.variation === 'default',
+                                },
+                              )}
                             >
                               {children}
                             </p>
@@ -127,16 +126,12 @@ const Features = ({ slice }: FeaturesProps): React.JSX.Element => {
                     {isFilled.link(item.button_link) && (
                       <CardFooter className="flex justify-center">
                         <Button
-                          variant={
-                            slice.variation === 'primary'
-                              ? 'secondary'
-                              : 'default'
-                          }
+                          variant={item.button_link.variant || 'default'}
                           asChild
                           className="mt-4 lg:mt-8"
                         >
                           <PrismicNextLink field={item.button_link}>
-                            {item.button_label || 'Missing Label'}{' '}
+                            {item.button_link.text || 'Missing Label'}
                             <span className="sr-only">
                               About {asText(item.feature_heading)}
                             </span>

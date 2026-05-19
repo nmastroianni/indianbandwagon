@@ -1000,6 +1000,129 @@ type FaqSliceVariation = FaqSliceDefault
 export type FaqSlice = prismic.SharedSlice<'faq', FaqSliceVariation>
 
 /**
+ * Item in *Features → Default → Primary → Features*
+ */
+export interface FeaturesSliceDefaultPrimaryFeaturesItem {
+  /**
+   * Feature Heading field in *Features → Default → Primary → Features*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: features.default.primary.features[].feature_heading
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  feature_heading: prismic.RichTextField
+
+  /**
+   * Feature Description field in *Features → Default → Primary → Features*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: features.default.primary.features[].feature_description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  feature_description: prismic.RichTextField
+
+  /**
+   * Button Link field in *Features → Default → Primary → Features*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: features.default.primary.features[].button_link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  button_link: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    'default' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'link'
+  >
+}
+
+/**
+ * Item in *Features → Secondary → Primary → Features*
+ */
+export interface FeaturesSliceSecondaryPrimaryFeaturesItem {
+  /**
+   * Feature Heading field in *Features → Secondary → Primary → Features*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: features.secondary.primary.features[].feature_heading
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  feature_heading: prismic.RichTextField
+
+  /**
+   * Feature Description field in *Features → Secondary → Primary → Features*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: features.secondary.primary.features[].feature_description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  feature_description: prismic.RichTextField
+
+  /**
+   * Button Link field in *Features → Secondary → Primary → Features*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: features.secondary.primary.features[].button_link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  button_link: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    'default' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'link'
+  >
+}
+
+/**
+ * Item in *Features → Primary → Primary → Features*
+ */
+export interface FeaturesSlicePrimaryPrimaryFeaturesItem {
+  /**
+   * Feature Heading field in *Features → Primary → Primary → Features*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: features.primary.primary.features[].feature_heading
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  feature_heading: prismic.RichTextField
+
+  /**
+   * Feature Description field in *Features → Primary → Primary → Features*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: features.primary.primary.features[].feature_description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  feature_description: prismic.RichTextField
+
+  /**
+   * Button Link field in *Features → Primary → Primary → Features*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: features.primary.primary.features[].button_link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  button_link: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    'default' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'link'
+  >
+}
+
+/**
  * Primary content in *Features → Default → Primary*
  */
 export interface FeaturesSliceDefaultPrimary {
@@ -1022,56 +1145,17 @@ export interface FeaturesSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/fields/rich-text
    */
   description: prismic.RichTextField
-}
-
-/**
- * Primary content in *Features → Items*
- */
-export interface FeaturesSliceDefaultItem {
-  /**
-   * Feature Heading field in *Features → Items*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: Enter feature heading
-   * - **API ID Path**: features.items[].feature_heading
-   * - **Documentation**: https://prismic.io/docs/fields/rich-text
-   */
-  feature_heading: prismic.RichTextField
 
   /**
-   * Feature Description field in *Features → Items*
+   * Features field in *Features → Default → Primary*
    *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: Enter short feature description
-   * - **API ID Path**: features.items[].feature_description
-   * - **Documentation**: https://prismic.io/docs/fields/rich-text
-   */
-  feature_description: prismic.RichTextField
-
-  /**
-   * Button Label field in *Features → Items*
-   *
-   * - **Field Type**: Text
+   * - **Field Type**: Group
    * - **Placeholder**: *None*
-   * - **API ID Path**: features.items[].button_label
-   * - **Documentation**: https://prismic.io/docs/fields/text
+   * - **API ID Path**: features.default.primary.features[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
    */
-  button_label: prismic.KeyTextField
-
-  /**
-   * Button Link field in *Features → Items*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: features.items[].button_link
-   * - **Documentation**: https://prismic.io/docs/fields/link
-   */
-  button_link: prismic.LinkField<
-    string,
-    string,
-    unknown,
-    prismic.FieldState,
-    never
+  features: prismic.GroupField<
+    Simplify<FeaturesSliceDefaultPrimaryFeaturesItem>
   >
 }
 
@@ -1085,7 +1169,7 @@ export interface FeaturesSliceDefaultItem {
 export type FeaturesSliceDefault = prismic.SharedSliceVariation<
   'default',
   Simplify<FeaturesSliceDefaultPrimary>,
-  Simplify<FeaturesSliceDefaultItem>
+  never
 >
 
 /**
@@ -1111,56 +1195,17 @@ export interface FeaturesSliceSecondaryPrimary {
    * - **Documentation**: https://prismic.io/docs/fields/rich-text
    */
   description: prismic.RichTextField
-}
-
-/**
- * Primary content in *Features → Items*
- */
-export interface FeaturesSliceSecondaryItem {
-  /**
-   * Feature Heading field in *Features → Items*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: Enter feature heading
-   * - **API ID Path**: features.items[].feature_heading
-   * - **Documentation**: https://prismic.io/docs/fields/rich-text
-   */
-  feature_heading: prismic.RichTextField
 
   /**
-   * Feature Description field in *Features → Items*
+   * Features field in *Features → Secondary → Primary*
    *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: Enter short feature description
-   * - **API ID Path**: features.items[].feature_description
-   * - **Documentation**: https://prismic.io/docs/fields/rich-text
-   */
-  feature_description: prismic.RichTextField
-
-  /**
-   * Button Label field in *Features → Items*
-   *
-   * - **Field Type**: Text
+   * - **Field Type**: Group
    * - **Placeholder**: *None*
-   * - **API ID Path**: features.items[].button_label
-   * - **Documentation**: https://prismic.io/docs/fields/text
+   * - **API ID Path**: features.secondary.primary.features[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
    */
-  button_label: prismic.KeyTextField
-
-  /**
-   * Button Link field in *Features → Items*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: features.items[].button_link
-   * - **Documentation**: https://prismic.io/docs/fields/link
-   */
-  button_link: prismic.LinkField<
-    string,
-    string,
-    unknown,
-    prismic.FieldState,
-    never
+  features: prismic.GroupField<
+    Simplify<FeaturesSliceSecondaryPrimaryFeaturesItem>
   >
 }
 
@@ -1174,7 +1219,7 @@ export interface FeaturesSliceSecondaryItem {
 export type FeaturesSliceSecondary = prismic.SharedSliceVariation<
   'secondary',
   Simplify<FeaturesSliceSecondaryPrimary>,
-  Simplify<FeaturesSliceSecondaryItem>
+  never
 >
 
 /**
@@ -1200,56 +1245,17 @@ export interface FeaturesSlicePrimaryPrimary {
    * - **Documentation**: https://prismic.io/docs/fields/rich-text
    */
   description: prismic.RichTextField
-}
-
-/**
- * Primary content in *Features → Items*
- */
-export interface FeaturesSlicePrimaryItem {
-  /**
-   * Feature Heading field in *Features → Items*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: Enter feature heading
-   * - **API ID Path**: features.items[].feature_heading
-   * - **Documentation**: https://prismic.io/docs/fields/rich-text
-   */
-  feature_heading: prismic.RichTextField
 
   /**
-   * Feature Description field in *Features → Items*
+   * Features field in *Features → Primary → Primary*
    *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: Enter short feature description
-   * - **API ID Path**: features.items[].feature_description
-   * - **Documentation**: https://prismic.io/docs/fields/rich-text
-   */
-  feature_description: prismic.RichTextField
-
-  /**
-   * Button Label field in *Features → Items*
-   *
-   * - **Field Type**: Text
+   * - **Field Type**: Group
    * - **Placeholder**: *None*
-   * - **API ID Path**: features.items[].button_label
-   * - **Documentation**: https://prismic.io/docs/fields/text
+   * - **API ID Path**: features.primary.primary.features[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
    */
-  button_label: prismic.KeyTextField
-
-  /**
-   * Button Link field in *Features → Items*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: features.items[].button_link
-   * - **Documentation**: https://prismic.io/docs/fields/link
-   */
-  button_link: prismic.LinkField<
-    string,
-    string,
-    unknown,
-    prismic.FieldState,
-    never
+  features: prismic.GroupField<
+    Simplify<FeaturesSlicePrimaryPrimaryFeaturesItem>
   >
 }
 
@@ -1263,7 +1269,7 @@ export interface FeaturesSlicePrimaryItem {
 export type FeaturesSlicePrimary = prismic.SharedSliceVariation<
   'primary',
   Simplify<FeaturesSlicePrimaryPrimary>,
-  Simplify<FeaturesSlicePrimaryItem>
+  never
 >
 
 /**
@@ -2224,12 +2230,12 @@ declare module '@prismicio/client' {
       FaqSliceVariation,
       FaqSliceDefault,
       FeaturesSlice,
+      FeaturesSliceDefaultPrimaryFeaturesItem,
       FeaturesSliceDefaultPrimary,
-      FeaturesSliceDefaultItem,
+      FeaturesSliceSecondaryPrimaryFeaturesItem,
       FeaturesSliceSecondaryPrimary,
-      FeaturesSliceSecondaryItem,
+      FeaturesSlicePrimaryPrimaryFeaturesItem,
       FeaturesSlicePrimaryPrimary,
-      FeaturesSlicePrimaryItem,
       FeaturesSliceVariation,
       FeaturesSliceDefault,
       FeaturesSliceSecondary,
