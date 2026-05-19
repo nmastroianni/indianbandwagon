@@ -4,18 +4,7 @@ import Navbar from './Navbar'
 const Header = async (): Promise<React.JSX.Element> => {
   const client = createClient()
   const settings = await client.getSingle('settings')
-  const layout = await client.getSingle('layout', {
-    graphQuery: `
-      {
-        layout {
-          cta_label
-          cta_link
-          logo
-          navigation
-        }
-      }
-    `,
-  })
+  const layout = await client.getSingle('layout')
   return (
     <>
       <Navbar
@@ -23,7 +12,6 @@ const Header = async (): Promise<React.JSX.Element> => {
         logo={layout.data.logo}
         navigation={layout.data.navigation}
         cta_link={layout.data.cta_link}
-        cta_label={layout.data.cta_label}
       />
     </>
   )

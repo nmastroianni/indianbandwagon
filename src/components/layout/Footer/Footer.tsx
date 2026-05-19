@@ -9,7 +9,6 @@ const Footer = async (): Promise<React.JSX.Element> => {
     {
       layout {
         copyright
-        cta_label
         cta_link
         privacy_label
         privacy_link

@@ -6,19 +6,22 @@
   "status": true,
   "json": {
     "Header": {
-      "cta_label": {
-        "type": "Text",
-        "config": {
-          "label": "CTA Label",
-          "placeholder": ""
-        }
-      },
       "cta_link": {
         "type": "Link",
         "config": {
           "label": "CTA Link",
-          "placeholder": "",
-          "select": null
+          "placeholder": "Enter a Call to Action",
+          "select": null,
+          "allowText": true,
+          "variants": [
+            "default",
+            "secondary",
+            "outline",
+            "ghost",
+            "destructive",
+            "link"
+          ],
+          "allowTargetBlank": true
         }
       },
       "logo": {
@@ -30,27 +33,22 @@
         }
       },
       "navigation": {
-        "type": "Group",
+        "type": "Link",
         "config": {
           "label": "Navigation",
+          "placeholder": "Enter navigation links",
+          "select": null,
+          "allowTargetBlank": true,
+          "allowText": true,
           "repeat": true,
-          "fields": {
-            "label": {
-              "type": "Text",
-              "config": {
-                "label": "Label",
-                "placeholder": ""
-              }
-            },
-            "link": {
-              "type": "Link",
-              "config": {
-                "label": "Link",
-                "placeholder": "",
-                "select": null
-              }
-            }
-          }
+          "variants": [
+            "default",
+            "secondary",
+            "outline",
+            "ghost",
+            "destructive",
+            "link"
+          ]
         }
       }
     },

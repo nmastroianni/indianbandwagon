@@ -210,31 +210,6 @@ export type HomepageDocument<Lang extends string = string> =
   >
 
 /**
- * Item in *Layout → Navigation*
- */
-export interface LayoutDocumentDataNavigationItem {
-  /**
-   * Label field in *Layout → Navigation*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: layout.navigation[].label
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  label: prismic.KeyTextField
-
-  /**
-   * Link field in *Layout → Navigation*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: layout.navigation[].link
-   * - **Documentation**: https://prismic.io/docs/fields/link
-   */
-  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>
-}
-
-/**
  * Item in *Layout → Social Media*
  */
 export interface LayoutDocumentDataSocialMediaItem {
@@ -280,21 +255,10 @@ type LayoutDocumentDataSlices1Slice =
  */
 interface LayoutDocumentData {
   /**
-   * CTA Label field in *Layout*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: layout.cta_label
-   * - **Tab**: Header
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  cta_label: prismic.KeyTextField
-
-  /**
    * CTA Link field in *Layout*
    *
    * - **Field Type**: Link
-   * - **Placeholder**: *None*
+   * - **Placeholder**: Enter a Call to Action
    * - **API ID Path**: layout.cta_link
    * - **Tab**: Header
    * - **Documentation**: https://prismic.io/docs/fields/link
@@ -304,7 +268,7 @@ interface LayoutDocumentData {
     string,
     unknown,
     prismic.FieldState,
-    never
+    'default' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'link'
   >
 
   /**
@@ -321,13 +285,21 @@ interface LayoutDocumentData {
   /**
    * Navigation field in *Layout*
    *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: layout.navigation[]
+   * - **Field Type**: Link
+   * - **Placeholder**: Enter navigation links
+   * - **API ID Path**: layout.navigation
    * - **Tab**: Header
-   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   * - **Documentation**: https://prismic.io/docs/fields/link
    */
-  navigation: prismic.GroupField<Simplify<LayoutDocumentDataNavigationItem>> /**
+  navigation: prismic.Repeatable<
+    prismic.LinkField<
+      string,
+      string,
+      unknown,
+      prismic.FieldState,
+      'default' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'link'
+    >
+  > /**
    * Privacy Label field in *Layout*
    *
    * - **Field Type**: Text
@@ -2200,7 +2172,6 @@ declare module '@prismicio/client' {
       HomepageDocumentDataSlicesSlice,
       LayoutDocument,
       LayoutDocumentData,
-      LayoutDocumentDataNavigationItem,
       LayoutDocumentDataSocialMediaItem,
       LayoutDocumentDataSlices1Slice,
       PageDocument,

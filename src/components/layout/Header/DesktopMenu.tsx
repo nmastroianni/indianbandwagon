@@ -1,10 +1,10 @@
-import { LayoutDocumentDataNavigationItem } from '../../../../prismicio-types'
 import { PrismicNextLink } from '@prismicio/next'
 import { cn } from '@/lib/utils'
-import { buttonVariants } from '@/components/ui/button'
+import { Button, ButtonProps, buttonVariants } from '@/components/ui/button'
+import { LinkField } from '@prismicio/client'
 
 type DesktopMenuProps = {
-  navigation: Array<LayoutDocumentDataNavigationItem>
+  navigation: LinkField[]
 }
 const DesktopMenu = ({ navigation }: DesktopMenuProps) => {
   return (
@@ -12,13 +12,17 @@ const DesktopMenu = ({ navigation }: DesktopMenuProps) => {
       <ul className="flex gap-x-3">
         {navigation.map((item, i) => {
           return (
-            <li key={item.label ? item.label + i : i}>
-              <PrismicNextLink
-                field={item.link}
-                className={cn(buttonVariants({ variant: 'ghost' }))}
+            <li key={item.text ? item.text + i : i}>
+              <Button
+                asChild
+                variant={item.variant as ButtonProps['variant']}
+                className={cn({
+                  'dark:text-foreground': item.variant === 'link',
+                  'text-black': item.variant === 'destructive',
+                })}
               >
-                {item.label}
-              </PrismicNextLink>
+                <PrismicNextLink field={item}>{item.text}</PrismicNextLink>
+              </Button>
             </li>
           )
         })}

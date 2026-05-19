@@ -1,5 +1,4 @@
 import { cn } from '@/lib/utils'
-import { LayoutDocumentDataNavigationItem } from '../../../../prismicio-types'
 import { MenuIcon } from 'lucide-react'
 import {
   Sheet,
@@ -10,16 +9,22 @@ import {
   SheetClose,
 } from '@/components/ui/sheet'
 import { Button, buttonVariants } from '@/components/ui/button'
-import { isFilled, KeyTextField } from '@prismicio/client'
+import { isFilled, KeyTextField, LinkField } from '@prismicio/client'
 import { PrismicNextLink } from '@prismicio/next'
 
 type MobileMenuProps = {
   className?: string
   site_title: KeyTextField
-  navigation: Array<LayoutDocumentDataNavigationItem>
+  navigation: LinkField[]
+  cta_link: LinkField
 }
 
-const MobileMenu = ({ navigation, className, site_title }: MobileMenuProps) => {
+const MobileMenu = ({
+  navigation,
+  className,
+  site_title,
+  cta_link,
+}: MobileMenuProps) => {
   return (
     <div className={cn('text-primary-foreground md:hidden', className)}>
       <Sheet>
@@ -36,13 +41,22 @@ const MobileMenu = ({ navigation, className, site_title }: MobileMenuProps) => {
             )}
           </SheetHeader>
           <ul className="mt-8 grid gap-y-4">
+            <li>
+              <SheetClose className="flex justify-center" asChild>
+                <Button asChild>
+                  <PrismicNextLink field={cta_link}>
+                    {cta_link.text}
+                  </PrismicNextLink>
+                </Button>
+              </SheetClose>
+            </li>
             {navigation.map((item, i) => {
               return (
-                <li key={item.label ? item.label + i : i}>
+                <li key={item.text ? item.text + i : i}>
                   <SheetClose asChild>
                     <Button asChild variant={'outline'} className="flex">
-                      <PrismicNextLink field={item.link}>
-                        {item.label}
+                      <PrismicNextLink field={item}>
+                        {item.text}
                       </PrismicNextLink>
                     </Button>
                   </SheetClose>

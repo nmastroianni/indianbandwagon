@@ -6,34 +6,47 @@ import {
   KeyTextField,
   LinkField,
 } from '@prismicio/client'
-import React from 'react'
 import Section from '../Section'
 import { PrismicNextImage, PrismicNextLink } from '@prismicio/next'
-import { buttonVariants } from '@/components/ui/button'
+import { Button } from '@/components/ui/button'
 import DesktopMenu from './DesktopMenu'
-import { LayoutDocumentDataNavigationItem } from '../../../../prismicio-types'
 import MobileMenu from './MobileMenu'
-import Heading from '@/components/typography/Heading'
 import Link from 'next/link'
 import { ThemeToggle } from '@/components/ThemeToggle'
+import { motion, useMotionValueEvent, useScroll } from 'motion/react'
+import { useState } from 'react'
 
 type NavbarProps = {
-  navigation: Array<LayoutDocumentDataNavigationItem>
+  navigation: LinkField[]
   cta_link: LinkField
-  cta_label: KeyTextField
   logo: ImageField
   site_title: KeyTextField
 }
 
-const Navbar = ({
-  logo,
-  navigation,
-  cta_link,
-  cta_label = 'Take Action',
-  site_title,
-}: NavbarProps) => {
+const Navbar = ({ logo, navigation, cta_link, site_title }: NavbarProps) => {
+  const [hidden, setHidden] = useState(false)
+  const { scrollY } = useScroll()
+
+  useMotionValueEvent(scrollY, 'change', latest => {
+    const previous = scrollY.getPrevious()
+    if (previous && latest > previous && latest > 150) {
+      setHidden(true)
+    } else {
+      setHidden(false)
+    }
+  })
   return (
-    <header className={cn('bg-background shadow-sm')}>
+    <motion.header
+      variants={{
+        visible: { y: 0 },
+        hidden: { y: '-100%' },
+      }}
+      animate={hidden ? 'hidden' : 'visible'}
+      transition={{ duration: 0.35, ease: 'easeInOut' }}
+      className={cn(
+        'sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 shadow-sm backdrop-blur supports-backdrop-filter:bg-background/70',
+      )}
+    >
       <Section
         width="xl"
         padded={false}
@@ -49,35 +62,47 @@ const Navbar = ({
                 width={60}
               />
             ) : (
-              <Heading as="h1" size="xl" className="p-1.5 dark:text-red-400">
+              <p className="p-1.5 font-bold text-primary dark:text-sidebar-primary">
                 {site_title}
-              </Heading>
+              </p>
             )}
           </Link>
           <div className="flex items-center gap-x-4 lg:gap-x-8">
             {navigation.length > 0 && (
               <>
                 <DesktopMenu navigation={navigation} />
-                <MobileMenu site_title={site_title} navigation={navigation} />
+                <MobileMenu
+                  site_title={site_title}
+                  navigation={navigation}
+                  cta_link={cta_link}
+                />
               </>
             )}
 
             {isFilled.link(cta_link) && (
-              <PrismicNextLink
-                field={cta_link}
-                className={cn(
-                  buttonVariants({ variant: 'default' }),
-                  'hidden md:inline-flex',
-                )}
+              <Button
+                asChild
+                variant={
+                  (cta_link.variant as
+                    | 'default'
+                    | 'outline'
+                    | 'secondary'
+                    | 'ghost'
+                    | 'destructive'
+                    | 'link') || 'default'
+                }
+                className="hidden md:inline-flex"
               >
-                {cta_label}
-              </PrismicNextLink>
+                <PrismicNextLink field={cta_link}>
+                  {cta_link.text}
+                </PrismicNextLink>
+              </Button>
             )}
             <ThemeToggle />
           </div>
         </div>
       </Section>
-    </header>
+    </motion.header>
   )
 }
 
