@@ -43,7 +43,10 @@ const MarqueeCard = ({ item }: MarqueeCardProps) => {
                   <Info className="h-4 w-4" />
                 </Button>
               </DialogTrigger>
-              <DialogContent className="h-full overflow-y-auto backdrop-blur-md sm:h-auto sm:max-h-[80vh] sm:max-w-lg md:max-w-4xl lg:max-w-6xl dark:bg-secondary/90" aria-describedby=''>
+              <DialogContent
+                className="h-full overflow-y-auto backdrop-blur-md sm:h-auto sm:max-h-[80vh] sm:max-w-lg md:max-w-4xl lg:max-w-6xl dark:bg-secondary/90"
+                aria-describedby=""
+              >
                 <DialogHeader>
                   <DialogTitle className="text-3xl">{item.name}</DialogTitle>
                 </DialogHeader>
@@ -81,11 +84,11 @@ const MarqueeCard = ({ item }: MarqueeCardProps) => {
           )}
 
           {/* Main Card Content */}
-          <div className="relative z-10 flex flex-col items-center gap-4 text-center">
+          <div className="relative z-10 flex flex-col items-center gap-4 py-6 text-center">
             {isFilled.image(item.logo) ? (
               <PrismicNextImage
                 field={item.logo}
-                className="h-26 w-auto"
+                className="h-16 w-auto"
                 imgixParams={{ ar: '1:1', fit: 'crop' }}
               />
             ) : (
